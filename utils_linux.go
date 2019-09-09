@@ -401,11 +401,13 @@ const (
 )
 
 func startContainer(context *cli.Context, spec *specs.Spec, action CtAct, criuOpts *libcontainer.CriuOpts) (int, error) {
+	//得到指定的容器ID
 	id := context.Args().First()
 	if id == "" {
 		return -1, errEmptyID
 	}
 
+	//TODO notify_socket
 	notifySocket := newNotifySocket(context, os.Getenv("NOTIFY_SOCKET"), id)
 	if notifySocket != nil {
 		notifySocket.setupSpec(context, spec)
